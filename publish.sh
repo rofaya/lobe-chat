@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 默认值
-IMAGE_NAME="lobe-chat-database-local:v1.51.3"  # 默认包含 tag
+IMAGE_NAME="lobe-chat-database-local:v1.53.0"  # 默认包含 tag
 DOCKERFILE="Dockerfile.database"
 USE_CN_MIRROR="true"
 PROXY_URL="http://192.168.1.180:2088"  # 默认不使用代理
