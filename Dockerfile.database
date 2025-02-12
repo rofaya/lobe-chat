@@ -6,6 +6,15 @@ FROM node:${NODEJS_VERSION}-slim AS base
 
 ARG USE_CN_MIRROR
 
+ARG HTTP_PROXY
+ARG HTTPS_PROXY
+
+ENV HTTP_PROXY=$HTTP_PROXY
+ENV HTTPS_PROXY=$HTTPS_PROXY
+
+RUN npm config set proxy $HTTP_PROXY
+RUN npm config set https-proxy $HTTPS_PROXY
+
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN \
@@ -38,7 +47,6 @@ FROM base AS builder
 ARG USE_CN_MIRROR
 ARG NEXT_PUBLIC_BASE_PATH
 ARG NEXT_PUBLIC_SERVICE_MODE
-ARG NEXT_PUBLIC_ENABLE_NEXT_AUTH
 ARG NEXT_PUBLIC_SENTRY_DSN
 ARG NEXT_PUBLIC_ANALYTICS_POSTHOG
 ARG NEXT_PUBLIC_POSTHOG_HOST
@@ -50,7 +58,6 @@ ARG NEXT_PUBLIC_UMAMI_WEBSITE_ID
 ENV NEXT_PUBLIC_BASE_PATH="${NEXT_PUBLIC_BASE_PATH}"
 
 ENV NEXT_PUBLIC_SERVICE_MODE="${NEXT_PUBLIC_SERVICE_MODE:-server}" \
-    NEXT_PUBLIC_ENABLE_NEXT_AUTH="${NEXT_PUBLIC_ENABLE_NEXT_AUTH:-1}" \
     APP_URL="http://app.com" \
     DATABASE_DRIVER="node" \
     DATABASE_URL="postgres://postgres:password@localhost:5432/postgres" \
@@ -73,6 +80,15 @@ ENV NEXT_PUBLIC_ANALYTICS_UMAMI="${NEXT_PUBLIC_ANALYTICS_UMAMI}" \
 
 # Node
 ENV NODE_OPTIONS="--max-old-space-size=8192"
+
+ARG HTTP_PROXY
+ARG HTTPS_PROXY
+
+ENV HTTP_PROXY=$HTTP_PROXY
+ENV HTTPS_PROXY=$HTTPS_PROXY
+
+RUN npm config set proxy $HTTP_PROXY
+RUN npm config set https-proxy $HTTPS_PROXY
 
 WORKDIR /app
 
@@ -148,10 +164,6 @@ ENV NODE_ENV="production" \
     NODE_EXTRA_CA_CERTS="" \
     NODE_TLS_REJECT_UNAUTHORIZED="" \
     SSL_CERT_DIR="/etc/ssl/certs/ca-certificates.crt"
-
-# Make the middleware rewrite through local as default
-# refs: https://github.com/lobehub/lobe-chat/issues/5876
-ENV MIDDLEWARE_REWRITE_THROUGH_LOCAL="1"
 
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0" \
