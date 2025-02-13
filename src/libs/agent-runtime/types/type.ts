@@ -30,7 +30,7 @@ export enum ModelProvider {
   Bedrock = 'bedrock',
   Cloudflare = 'cloudflare',
   DeepSeek = 'deepseek',
-  Doubao = 'doubao',
+  Dify='dify',
   FireworksAI = 'fireworksai',
   GiteeAI = 'giteeai',
   Github = 'github',
@@ -62,6 +62,7 @@ export enum ModelProvider {
   XAI = 'xai',
   ZeroOne = 'zeroone',
   ZhiPu = 'zhipu',
+  Doubao = 'doubao',
 }
 
 export type ModelProviderKey = Lowercase<keyof typeof ModelProvider>;

@@ -21,3 +21,4 @@ export * from './types';
 export { AgentRuntimeError } from './utils/createError';
 export { LobeZeroOneAI } from './zeroone';
 export { LobeZhipuAI } from './zhipu';
+export { LobeDify } from './dify';

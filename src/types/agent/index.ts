@@ -17,8 +17,16 @@ export interface LobeAgentTTSConfig {
   };
 }
 
+export interface DifyChatConfig {
+  baseUrl: string;
+  enabled: boolean;
+  token: string;
+  userId: string;
+}
+
 export interface LobeAgentConfig {
   chatConfig: LobeAgentChatConfig;
+  dify: DifyChatConfig;
   fewShots?: FewShots;
   files?: FileItem[];
   id?: string;

@@ -104,6 +104,12 @@ export default {
     },
     title: '创建自定义 AI 服务商',
   },
+  dify: {
+    checker: {
+      desc: '测试 Dify 地址是否正确填写',
+      title: '连通性检查'
+    }
+  },
   github: {
     personalAccessToken: {
       desc: '填入你的 Github PAT，点击 [这里](https://github.com/settings/tokens) 创建',
@@ -299,7 +305,8 @@ export default {
   zeroone: {
     title: '01.AI 零一万物',
   },
+
   zhipu: {
     title: '智谱',
-  },
+  }
 };

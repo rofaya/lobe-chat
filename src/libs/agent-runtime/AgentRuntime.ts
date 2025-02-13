@@ -52,6 +52,7 @@ import { LobeWenxinAI } from './wenxin';
 import { LobeXAI } from './xai';
 import { LobeZeroOneAI } from './zeroone';
 import { LobeZhipuAI } from './zhipu';
+import { LobeDify } from './dify';
 
 export interface AgentChatOptions {
   enableTrace?: boolean;
@@ -142,6 +143,7 @@ class AgentRuntime {
       bedrock: Partial<LobeBedrockAIParams>;
       cloudflare: Partial<LobeCloudflareParams>;
       deepseek: Partial<ClientOptions>;
+      dify: Partial<{ baseUrl: string; conversation_id: string, token: string; userId: string;}>;
       doubao: Partial<ClientOptions>;
       fireworksai: Partial<ClientOptions>;
       giteeai: Partial<ClientOptions>;
@@ -384,6 +386,12 @@ class AgentRuntime {
         runtimeModel = new LobeWenxinAI(params.wenxin);
         break;
       }
+
+      case ModelProvider.Dify: {
+        runtimeModel = new LobeDify(params.dify || {})
+        break
+      }
+
     }
     return new AgentRuntime(runtimeModel);
   }

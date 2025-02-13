@@ -41,6 +41,7 @@ import { useGithubProvider } from './Github';
 import { useHuggingFaceProvider } from './HuggingFace';
 import { useOllamaProvider } from './Ollama';
 import { useOpenAIProvider } from './OpenAI';
+import { useDifyProvider } from './Dify'
 
 export const useProviderList = (): ProviderItem[] => {
   const AzureProvider = useAzureProvider();
@@ -50,10 +51,12 @@ export const useProviderList = (): ProviderItem[] => {
   const CloudflareProvider = useCloudflareProvider();
   const GithubProvider = useGithubProvider();
   const HuggingFaceProvider = useHuggingFaceProvider();
+  const DifyProvider = useDifyProvider();
 
   return useMemo(
     () => [
       OpenAIProvider,
+      DifyProvider,
       AzureProvider,
       OllamaProvider,
       AnthropicProviderCard,

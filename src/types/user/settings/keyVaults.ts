@@ -25,6 +25,12 @@ export interface CloudflareKeyVault {
   baseURLOrAccountID?: string;
 }
 
+export interface DifyKeyValut {
+  baseUrl?: string;
+  token?: string;
+  userId?: string;
+}
+
 export interface UserKeyVaults {
   ai21?: OpenAICompatibleKeyVault;
   ai360?: OpenAICompatibleKeyVault;
@@ -34,7 +40,7 @@ export interface UserKeyVaults {
   bedrock?: AWSBedrockKeyVault;
   cloudflare?: CloudflareKeyVault;
   deepseek?: OpenAICompatibleKeyVault;
-  doubao?: OpenAICompatibleKeyVault;
+  dify?: DifyKeyValut;
   fireworksai?: OpenAICompatibleKeyVault;
   giteeai?: OpenAICompatibleKeyVault;
   github?: OpenAICompatibleKeyVault;
@@ -68,4 +74,5 @@ export interface UserKeyVaults {
   xai?: OpenAICompatibleKeyVault;
   zeroone?: OpenAICompatibleKeyVault;
   zhipu?: OpenAICompatibleKeyVault;
+  doubao?: OpenAICompatibleKeyVault;
 }

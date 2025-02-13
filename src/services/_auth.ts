@@ -48,7 +48,7 @@ export const getProviderAuthPayload = (
     case ModelProvider.Azure: {
       return {
         apiKey: keyVaults.apiKey,
-        
+
         apiVersion: keyVaults.apiVersion,
         /** @deprecated */
 azureApiVersion: keyVaults.apiVersion,
@@ -63,11 +63,20 @@ azureApiVersion: keyVaults.apiVersion,
     case ModelProvider.Cloudflare: {
       return {
         apiKey: keyVaults?.apiKey,
-        
+
         baseURLOrAccountID: keyVaults?.baseURLOrAccountID,
         /** @deprecated */
 cloudflareBaseURLOrAccountID: keyVaults?.baseURLOrAccountID,
       };
+    }
+
+    case ModelProvider.Dify: {
+      const { token, baseUrl, userId } = keyVaultsConfigSelectors.difyConfig(useUserStore.getState())
+      return {
+        baseUrl,
+        token,
+        userId,
+      }
     }
 
     default: {

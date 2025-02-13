@@ -6,6 +6,7 @@ import AgentModal from './AgentModal';
 import AgentPlugin from './AgentPlugin';
 import AgentPrompt from './AgentPrompt';
 import AgentTTS from './AgentTTS';
+import Dify from './Dify';
 import StoreUpdater, { StoreUpdaterProps } from './StoreUpdater';
 import { Provider, createStore } from './store';
 
@@ -21,6 +22,7 @@ export const AgentSettings = (props: AgentSettingsProps) => {
       <AgentChat />
       <AgentModal />
       <AgentTTS />
+      <Dify/>
       {enablePlugins && <AgentPlugin />}
     </Provider>
   );
