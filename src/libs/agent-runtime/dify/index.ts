@@ -48,7 +48,7 @@ export class LobeDify implements LobeRuntimeAI {
 
     const chatMessagePayload = {
       auto_generate_name: true,
-      conversation_id: this.difyParams?.conversation_id ?? '',
+      conversation_id: this.difyParams?.conversation_id ?? options?.dify?.conversation_id ?? '',
       files: [],
       inputs: [],
       query: textQuery,

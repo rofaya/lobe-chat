@@ -39,6 +39,11 @@ export interface OpenAIChatMessage {
  */
 export interface ChatStreamPayload {
   /**
+   * @title Dify 使用的请求参数
+   */
+  dify?: DifyChatMessage;
+
+  /**
    * @title 控制生成文本中的惩罚系数，用于减少重复性
    * @default 0
    */
@@ -96,12 +101,6 @@ export interface ChatStreamPayload {
 
 export interface ChatCompetitionOptions {
   callback?: ChatStreamCallbacks;
-
-  /**
-   * @title Dify 使用的请求参数
-   */
-  dify?: DifyChatMessage;
-
   /**
    * response headers
    */
