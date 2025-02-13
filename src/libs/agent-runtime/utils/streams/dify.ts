@@ -3,6 +3,7 @@ import { ChatStreamCallbacks } from '../..';
 
 interface DifyChunk {
   answer?: string;
+  conversation_id: string;
   event: string;
   id?: string;
   message?: string;
@@ -20,7 +21,7 @@ function processDifyData(buffer: string): DifyChunk | undefined {
 
   for (let line of lines) {
     line = line.trim();
-    
+
     // 忽略空行和 ping 事件
     if (!line || line === 'event: ping') continue;
 
@@ -29,7 +30,7 @@ function processDifyData(buffer: string): DifyChunk | undefined {
       line = line.slice(5).trim();
       // 确保去掉前缀后还有内容
       if (!line) continue;
-      
+
       // 处理特殊情况：data 可能被包裹在引号中
       if (line.startsWith('"') && line.endsWith('"')) {
         line = line.slice(1, -1);
@@ -61,6 +62,8 @@ export const transformDifyStream = (buffer: Uint8Array): StreamProtocolChunk => 
 
   // 如果解析失败或无法获取消息 id，则返回空文本
   const id = chunk?.message_id ?? chunk?.task_id ?? chunk?.id;
+  const conversation_id = chunk?.conversation_id;
+
   if (!chunk || !id) {
     return {
       data: '',

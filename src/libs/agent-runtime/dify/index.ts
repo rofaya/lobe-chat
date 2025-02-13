@@ -48,12 +48,12 @@ export class LobeDify implements LobeRuntimeAI {
 
     const chatMessagePayload = {
       auto_generate_name: true,
-      conversation_id: this.difyParams?.conversation_id ?? options?.dify?.conversation_id ?? '',
+      conversation_id: this.difyParams?.conversation_id ?? payload?.dify?.conversation_id ?? '',
       files: [],
       inputs: [],
       query: textQuery,
       response_mode: 'streaming',
-      user: this.difyParams.userId,
+      user: this.difyParams.userId ?? payload.dify?.user,
     }
 
     console.log("Pending chatMessagePayload", chatMessagePayload);
