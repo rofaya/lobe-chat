@@ -96,6 +96,12 @@ export interface ChatStreamPayload {
 
 export interface ChatCompetitionOptions {
   callback?: ChatStreamCallbacks;
+
+  /**
+   * @title Dify 使用的请求参数
+   */
+  dify?: DifyChatMessage;
+
   /**
    * response headers
    */
@@ -157,4 +163,22 @@ export interface ChatStreamCallbacks {
   /** `onToken`: Called for each tokenized message. */
   onToken?: (token: string) => Promise<void> | void;
   onToolCall?: () => Promise<void> | void;
+  /** `onUpdateConversationId`: Called when receiving conversation_id from Dify */
+  onUpdateConversationId?: (conversationId: string) => Promise<void> | void;
+}
+
+export interface DifyFile {
+  transfer_method: string;
+  type: string;
+  upload_file_id: string;
+}
+
+export interface DifyChatMessage {
+  auto_generate_name?: boolean;
+  conversation_id?: string | null;
+  files?: DifyFile[] | null;
+  inputs: any;
+  query: string;
+  stream?: boolean;
+  user: string | undefined;
 }
