@@ -12,7 +12,6 @@ export interface DifyParams {
   conversation_id?: string;
   token?: string;
   userId: string;
-  topicId?: string;
 }
 
 export class LobeDify implements LobeRuntimeAI {
@@ -28,6 +27,8 @@ export class LobeDify implements LobeRuntimeAI {
       token,
       userId,
     };
+
+    console.log("LobeDify 初始化", this.difyParams)
   }
 
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions) {
@@ -54,6 +55,8 @@ export class LobeDify implements LobeRuntimeAI {
       response_mode: 'streaming',
       user: this.difyParams.userId,
     }
+
+    console.log("Pending chatMessagePayload", chatMessagePayload);
 
     const response = await fetch(urlJoin(this.difyParams.baseUrl, '/chat-messages'), {
       body: JSON.stringify(chatMessagePayload),

@@ -111,6 +111,7 @@ class AgentRuntime {
   async embeddings(payload: EmbeddingsPayload, options?: EmbeddingsOptions) {
     return this._runtime.embeddings?.(payload, options);
   }
+
   async textToSpeech(payload: TextToSpeechPayload, options?: EmbeddingsOptions) {
     return this._runtime.textToSpeech?.(payload, options);
   }

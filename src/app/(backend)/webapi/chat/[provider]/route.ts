@@ -25,7 +25,6 @@ export const POST = checkAuth(async (req: Request, { params, jwtPayload, createR
     }
 
     // ============  2. create chat completion   ============ //
-
     const data = (await req.json()) as ChatStreamPayload;
 
     const tracePayload = getTracePayload(req);
@@ -38,6 +37,8 @@ export const POST = checkAuth(async (req: Request, { params, jwtPayload, createR
         trace: tracePayload,
       });
     }
+
+    console.log("router data", data);
 
     return await agentRuntime.chat(data, { user: jwtPayload.userId, ...traceOptions });
   } catch (e) {
