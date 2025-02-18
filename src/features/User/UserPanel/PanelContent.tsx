@@ -61,7 +61,8 @@ const PanelContent = memo<{ closePopover: () => void }>(({ closePopover }) => {
         {isLoginWithAuth ? (
           <Menu items={logoutItems} onClick={handleSignOut} />
         ) : (
-          <BrandWatermark />
+          <div/>
+          // <BrandWatermark />
         )}
         <Flexbox align={'center'} flex={'none'} gap={6} horizontal>
           <LangButton />

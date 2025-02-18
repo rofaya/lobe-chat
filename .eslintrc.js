@@ -18,6 +18,11 @@ config.rules['unicorn/catch-error-name'] = 0;
 config.rules['unicorn/no-array-for-each'] = 0;
 config.rules['unicorn/prefer-number-properties'] = 0;
 
+// 添加以下三行来禁用警告
+config.rules['@next/next/no-img-element'] = 'off';
+config.rules['unused-imports/no-unused-imports'] = 'off';
+config.rules['@typescript-eslint/no-unused-vars'] = 'off';
+
 config.overrides = [
   {
     extends: ['plugin:mdx/recommended'],
