@@ -13,7 +13,7 @@ import {
   EnabledAiModel,
   EnabledProvider,
 } from '@/types/aiProvider';
-import { ProviderConfig } from '@/types/user/settings';
+import { ProviderConfig, GlobalLLMProviderKey } from '@/types/user/settings';
 import { merge, mergeArrayById } from '@/utils/merge';
 
 type DecryptUserKeyVaults = (encryptKeyVaultsStr: string | null) => Promise<any>;
@@ -43,8 +43,18 @@ export class AiInfraRepos {
   getAiProviderList = async () => {
     const userProviders = await this.aiProviderModel.getAiProviderList();
 
-    // 1. 先创建一个基于 DEFAULT_MODEL_PROVIDER_LIST id 顺序的映射
-    const orderMap = new Map(DEFAULT_MODEL_PROVIDER_LIST.map((item, index) => [item.id, index]));
+    // 获取环境变量中的自定义顺序
+    const customOrder = process.env.MODEL_PROVIDER_ORDER?.split(',').map((s) => s.trim()) || [];
+
+    // 创建一个基于自定义顺序的映射，未指定的顺序值设为较大数
+    const orderMap = new Map(
+      DEFAULT_MODEL_PROVIDER_LIST.map((item) => {
+        const customIndex = customOrder.indexOf(item.id as GlobalLLMProviderKey);
+        // 如果在自定义顺序中找到，使用其索引值；否则使用一个较大的数（1000 + 原始索引）
+        const order = customIndex !== -1 ? customIndex : 1000 + DEFAULT_MODEL_PROVIDER_LIST.indexOf(item);
+        return [item.id, order];
+      }),
+    );
 
     const builtinProviders = DEFAULT_MODEL_PROVIDER_LIST.map((item) => ({
       description: item.description,
@@ -58,7 +68,7 @@ export class AiInfraRepos {
 
     const mergedProviders = mergeArrayById(builtinProviders, userProviders);
 
-    // 3. 根据 orderMap 排序
+    // 根据 orderMap 排序
     return mergedProviders.sort((a, b) => {
       const orderA = orderMap.get(a.id) ?? Number.MAX_SAFE_INTEGER;
       const orderB = orderMap.get(b.id) ?? Number.MAX_SAFE_INTEGER;
