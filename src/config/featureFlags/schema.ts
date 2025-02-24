@@ -62,8 +62,8 @@ export const DEFAULT_FEATURE_FLAGS: IFeatureFlags = {
   plugins: true,
   dalle: true,
 
-  check_updates: true,
-  welcome_suggest: true,
+  check_updates: false,
+  welcome_suggest: false,
   token_counter: true,
 
   knowledge_base: true,
@@ -73,15 +73,15 @@ export const DEFAULT_FEATURE_FLAGS: IFeatureFlags = {
 
   cloud_promotion: false,
 
-  market: true,
-  speech_to_text: true,
-  changelog: true,
+  market: false,
+  speech_to_text: false,
+  changelog: false,
 
   // the flags below can only be used with commercial license
   // if you want to use it in the commercial usage
   // please contact us for more information: hello@lobehub.com
-  commercial_hide_github: false,
-  commercial_hide_docs: false,
+  commercial_hide_github: true,
+  commercial_hide_docs: true,
 };
 
 export const mapFeatureFlagsEnvToState = (config: IFeatureFlags) => {

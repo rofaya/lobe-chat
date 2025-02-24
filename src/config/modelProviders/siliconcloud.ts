@@ -689,7 +689,7 @@ const SiliconCloud: ModelProviderCard = {
   id: 'siliconcloud',
   modelList: { showModelFetcher: true },
   modelsUrl: 'https://siliconflow.cn/zh-cn/models',
-  name: 'SiliconCloud',
+  name: '硅基流动',
   proxyUrl: {
     placeholder: 'https://api.siliconflow.cn/v1',
   },
